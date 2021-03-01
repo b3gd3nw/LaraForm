@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
 
     $('.delete-btn').click(function () {
-        var res = confirm('Подтвердите действия');
+        var res = confirm('Confirm Action');
         if(!res){
             return false;
         }

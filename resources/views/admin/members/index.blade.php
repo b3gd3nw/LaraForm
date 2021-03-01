@@ -11,6 +11,12 @@
                     <h1 class="m-0 text-dark">All Members</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
+            @if (session('success'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <h4><i class="icon fa fa-check"></i>{{ session('success') }}</h4>
+                </div>
+                @endif
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
@@ -25,7 +31,7 @@
                         <th style="width: 1%">
                             #
                         </th>
-                        <th style="width: 20%">
+                        <th style="width: 5%">
                             Photo
                         </th>
                         <th style="width: 20%">
@@ -37,7 +43,7 @@
                         <th style="width: 20%" class="text-center">
                             Email
                         </th>
-                        <th style="width: 20%">
+                        <th style="width: 30%">
                         </th>
                     </tr>
                     </thead>
@@ -51,46 +57,33 @@
                                     photo
                                 </td>
                                 <td>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar2.png">
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar3.png">
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar04.png">
-                                        </li>
-                                    </ul>
+                                    {{ $member['firstname'] . ' ' . $member['lastname'] }}
                                 </td>
                                 <td class="project_progress">
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: 57%">
-                                        </div>
-                                    </div>
-                                    <small>
-                                        57% Complete
-                                    </small>
+                                  {{ $member['country'] }}
                                 </td>
                                 <td class="project-state">
-                                    <span class="badge badge-success">Success</span>
+                                    <a href="mailto:{{ $member['email'] }}">{{ $member['email'] }}</a>
                                 </td>
                                 <td class="project-actions text-right">
-                                    <div class="row">
-                                        <div class="col-sm-12 text-center">
+                                    <div class="row justify-content-end">
+                                        <div class="col-sm-4 text-center">
                                             <a class="btn btn-primary btn-sm" href="#">
                                                 <i class="fas fa-folder">
                                                 </i>
                                                 View
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="#">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Delete
-                                            </a>
+                                        </div>
+                                        <div class="col-sm-4 text-center">
+                                            <form action="{{ route('member.destroy', $member['id'])  }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm delete-btn">
+                                                    <i class="fas fa-trash">
+                                                    </i>
+                                                    Delete
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="row">

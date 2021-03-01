@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\MembersController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,22 +16,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-//Route::middleware(['auth'])->group(function () {
+//Route::get('token', [MemberController::class, 'getCSRF']);
 //
+//Route::get('/', function () {
+//    return view('index');
 //});
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::middleware(['role:admin'])->prefix('admin_panel')->group(function () {
-        Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
 
-        Route::resource('member', MembersController::class);
+
+Route::prefix('/api')->group(function (){
+    Auth::routes();
+    Route::resource('submit', MemberController::class);
+
+    Route::group(['middleware' => 'auth'], function () {
+//    Route::middleware('auth:api')->group(function (){
+        Route::middleware(['role:admin'])->prefix('admin_panel')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
+
+            Route::resource('member', MembersController::class);
+        });
     });
+
+
 });
+Route::get('/{any}', function () {
+    return view('index');
+})->where('any', '.*');
+
+
+
+
+

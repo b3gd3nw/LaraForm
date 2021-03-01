@@ -84,6 +84,8 @@ class MembersController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+
+        return redirect()->back()->withSuccess('Fuck OFF');
     }
 }
