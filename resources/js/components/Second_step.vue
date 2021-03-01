@@ -2,50 +2,48 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 text-center">
-                <form
-                    id="app"
-                    @submit="checkForm"
-                    action="/second"
-                    method="post"
-                >
-
+                <form method="POST" id="form">
                     <p>
-                        <label for="firstname">First Name</label>
+                        <label for="company">Company</label>
                         <input
-                            id="firstname"
-                            v-model="name"
+                            class="form-control"
+                            v-model="company"
+                            id="company"
                             type="text"
-                            name="firstname"
+                            name="company"
                         >
                     </p>
                     <p>
-                        <label for="lastname">Last Name</label>
+                        <label for="position">Position</label>
                         <input
-                            id="lastname"
-                            v-model="name"
+                            class="form-control"
+                            v-model="position"
+                            id="position"
                             type="text"
-                            name="firstname"
+                            name="position"
                         >
                     </p>
                     <p>
-                        <label for="birthdate">Birth Date</label>
-                        <input
-                            id="birthdate"
-                            v-model="name"
+                        <label for="aboutme">About Me</label>
+                        <textarea
+                            class="form-control"
+                            v-model="aboutme"
+                            id="aboutme"
                             type="text"
-                            name="birthdate"
-                        >
+                            name="aboutme"
+                        ></textarea>
                     </p>
                     <p>
-                        <label for="reportsubject">Report Subject</label>
+                        <label for="photo">Photo</label>
                         <input
-                            id="reportsubject"
-                            v-model="name"
+                            class="form-control"
+                            v-model="photo"
+                            id="photo"
                             type="text"
-                            name="reportsubject"
+                            name="photo"
                         >
                     </p>
-                    <button type="submit" class="btn btn-primary btn-next">Next</button>
+                    <a @click="send" class="btn btn-primary btn-next">Next</a>
                 </form>
             </div>
         </div>
@@ -54,10 +52,41 @@
 
 <script>
 export default {
-    name: "Second_step"
+    data() {
+        return {
+            company: '',
+            position: '',
+            aboutme: '',
+            photo: ''
+        }
+    },
+    methods: {
+        send() {
+            let formData = new FormData(document.getElementById("form"));
+            console.log(formData);
+            axios.post(
+                '/api/submit', {
+                    company: this.company,
+                    position: this.position,
+                    aboutme: this.aboutme,
+                    photo: this.photo
+                }
+            ).then(responce=> {
+                if(responce['data'] === 200){
+                    this.$cookie.set('step', 'three', 1);
+                    this.$router.push('social');
+                }
+            });
+        }
+    }
 }
 </script>
 
 <style scoped>
-
+label {
+    float: left;
+}
+.btn-next {
+    float: right;
+}
 </style>

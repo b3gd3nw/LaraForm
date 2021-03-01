@@ -22,6 +22,7 @@ window.Vue = require('vue').default;
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header_map', require('./components/Header.vue').default);
 Vue.component('step-one', require('./components/First_step').default);
+Vue.component('step-two', require('./components/Second_step').default);
 Vue.component('reg-form', require('./components/Reg_form').default);
 
 
@@ -34,6 +35,10 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
+
+import VueCookie from 'vue-cookie'
+// Tell Vue to use the plugin
+Vue.use(VueCookie);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
