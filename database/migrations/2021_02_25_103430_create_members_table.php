@@ -19,7 +19,7 @@ class CreateMembersTable extends Migration
             $table->string('lastname');
             $table->date('birthdate');
             $table->string('reportsubject');
-            $table->string('country');
+            $table->foreignId('countryId')->references('id')->on('countries');
             $table->bigInteger('phone');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

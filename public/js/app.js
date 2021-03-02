@@ -1925,8 +1925,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
+ // // console.log(Object.keys(allCountry));
+// console.log(this.countries);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -1940,13 +1940,22 @@ __webpack_require__.r(__webpack_exports__);
       email: ''
     };
   },
+  props: {
+    countries_data: {
+      type: Object.Array,
+      "default": function _default() {
+        return {};
+      }
+    }
+  },
   methods: {
     send: function send() {
       var _this = this;
 
-      var formData = new FormData(document.getElementById("form"));
-      console.log(formData);
-      axios.post('/api/submit', {
+      console.log(this.countries); // let formData = new FormData(document.getElementById("form"));
+      // console.log(formData);
+
+      axios.post('/api/submit_member', {
         firstname: this.firstname,
         lastname: this.lastname,
         birthdate: this.birthdate,
@@ -2013,11 +2022,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Reg_form",
   components: {
     Second_step: _Second_step__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  data: function data() {
+    return {
+      countries: ''
+    };
+  },
+  mounted: function mounted() {
+    var self = this;
+    axios.get('/api/countries').then(function (response) {
+      self.countries = response.data;
+      console.log(self.countries);
+    })["catch"](function (error) {
+      console.log(error);
+    });
   }
 });
 
@@ -2086,6 +2111,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2099,13 +2127,17 @@ __webpack_require__.r(__webpack_exports__);
     send: function send() {
       var _this = this;
 
-      var formData = new FormData(document.getElementById("form"));
+      var formData = new FormData();
+      formData.append('company', this.company);
+      formData.append('position', this.position);
+      formData.append('aboutme', this.aboutme);
+      formData.append('photo', this.photo);
       console.log(formData);
-      axios.post('/api/submit', {
-        company: this.company,
-        position: this.position,
-        aboutme: this.aboutme,
-        photo: this.photo
+      axios.post('/api/submit_profile', {
+        formData: formData,
+        'headers': {
+          'Content-Type': 'multipart/form-data'
+        }
       }).then(function (responce) {
         if (responce['data'] === 200) {
           _this.$cookie.set('step', 'three', 1);
@@ -2113,6 +2145,9 @@ __webpack_require__.r(__webpack_exports__);
           _this.$router.push('social');
         }
       });
+    },
+    handleFileUpload: function handleFileUpload(event) {
+      this.photo = event.target.files[0];
     }
   }
 });
@@ -38846,27 +38881,50 @@ var render = function() {
           _c("p", [
             _c("label", { attrs: { for: "country" } }, [_vm._v("Country")]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.country,
-                  expression: "country"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { id: "country", type: "text", name: "country" },
-              domProps: { value: _vm.country },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.country,
+                    expression: "country"
                   }
-                  _vm.country = $event.target.value
+                ],
+                staticClass: "form-control",
+                attrs: { name: "country", id: "country" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.country = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
                 }
-              }
-            })
+              },
+              _vm._l(_vm.countries_data, function(country) {
+                return _c(
+                  "option",
+                  { key: country["id"], domProps: { value: country["id"] } },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(country["name"]) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              }),
+              0
+            )
           ]),
           _vm._v(" "),
           _c("p", [
@@ -39008,7 +39066,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return this.$cookie.get("step") === "second"
     ? _c("div", [_c("second_step")], 1)
-    : _c("div", [_c("step-one")], 1)
+    : _c(
+        "div",
+        [_c("step-one", { attrs: { countries_data: _vm.countries } })],
+        1
+      )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39119,23 +39181,17 @@ var render = function() {
             _c("label", { attrs: { for: "photo" } }, [_vm._v("Photo")]),
             _vm._v(" "),
             _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.photo,
-                  expression: "photo"
-                }
-              ],
+              ref: "photo",
               staticClass: "form-control",
-              attrs: { id: "photo", type: "text", name: "photo" },
-              domProps: { value: _vm.photo },
+              attrs: {
+                id: "photo",
+                type: "file",
+                name: "photo",
+                accept: "image/*"
+              },
               on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.photo = $event.target.value
+                change: function($event) {
+                  return _vm.handleFileUpload($event)
                 }
               }
             })

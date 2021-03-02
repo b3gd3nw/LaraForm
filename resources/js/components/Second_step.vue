@@ -31,16 +31,19 @@
                             id="aboutme"
                             type="text"
                             name="aboutme"
+
                         ></textarea>
                     </p>
                     <p>
                         <label for="photo">Photo</label>
                         <input
                             class="form-control"
-                            v-model="photo"
                             id="photo"
-                            type="text"
+                            v-on:change="handleFileUpload($event)"
+                            type="file"
                             name="photo"
+                            accept="image/*"
+                            ref="photo"
                         >
                     </p>
                     <a @click="send" class="btn btn-primary btn-next">Next</a>
@@ -62,14 +65,18 @@ export default {
     },
     methods: {
         send() {
-            let formData = new FormData(document.getElementById("form"));
+            let formData = new FormData();
+            formData.append('company', this.company);
+            formData.append('position', this.position);
+            formData.append('aboutme', this.aboutme);
+            formData.append('photo', this.photo);
             console.log(formData);
             axios.post(
-                '/api/submit', {
-                    company: this.company,
-                    position: this.position,
-                    aboutme: this.aboutme,
-                    photo: this.photo
+                '/api/submit_profile', {
+                    formData,
+                    'headers': {
+                        'Content-Type': 'multipart/form-data'
+                    }
                 }
             ).then(responce=> {
                 if(responce['data'] === 200){
@@ -77,6 +84,9 @@ export default {
                     this.$router.push('social');
                 }
             });
+        },
+        handleFileUpload(event){
+            this.photo = event.target.files[0];
         }
     }
 }

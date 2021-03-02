@@ -45,13 +45,11 @@
                     </p>
                     <p>
                         <label for="country">Country</label>
-                        <input
-                            class="form-control"
-                            v-model="country"
-                            id="country"
-                            type="text"
-                            name="country"
-                        >
+                        <select v-model="country" name="country" id="country" class="form-control">
+                            <option :value="country['id']" v-for="country in countries_data" :key="country['id']">
+                                {{ country['name'] }}
+                            </option>
+                        </select>
                     </p>
                     <p>
                         <label for="phone">Phone</label>
@@ -82,7 +80,8 @@
 
 <script>
 import { required, minLength, between } from 'vuelidate/lib/validators'
-
+// // console.log(Object.keys(allCountry));
+// console.log(this.countries);
 export default {
     data() {
         return {
@@ -93,14 +92,24 @@ export default {
             country: '',
             phone: '',
             email: '',
+
+        }
+    },
+    props : {
+        countries_data: {
+            type: Object.Array,
+            default(){
+                return {}
+            }
         }
     },
     methods: {
         send() {
-            let formData = new FormData(document.getElementById("form"));
-            console.log(formData);
+            console.log(this.countries);
+            // let formData = new FormData(document.getElementById("form"));
+            // console.log(formData);
             axios.post(
-                '/api/submit', {
+                '/api/submit_member', {
                     firstname: this.firstname,
                     lastname: this.lastname,
                     birthdate: this.birthdate,
@@ -116,8 +125,11 @@ export default {
                 }
             });
         }
+
+
     }
 }
+
 </script>
 
 <style scoped>

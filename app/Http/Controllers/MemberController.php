@@ -10,25 +10,6 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -36,44 +17,22 @@ class MemberController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MemberRequest $request)
+    public function addMember(MemberRequest $request)
     {
         $member = new Member();
         $member->firstname = $request->input('firstname');
         $member->lastname = $request->input('lastname');
         $member->birthdate = $request->input('birthdate');
         $member->reportsubject = $request->input('reportsubject');
-        $member->country = $request->input('country');
+        $member->countryId = $request->input('country');
         $member->phone = $request->input('phone');
         $member->email = $request->input('email');
 
         $member->save();
 
-        setcookie('userid', $member->id, 0,'/');
+        setcookie('userid', $member->id, 0, '/');
 
         return http_response_code(200);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -83,32 +42,20 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileRequest $request)
+    public function addProfile(ProfileRequest $request)
     {
-        $profile = new Profile();
-        $profile->company = $request->input('company');
-        $profile->position = $request->input('postion');
-        $profile->aboutme = $request->input('aboutme');
-        $profile->photo = $request->input('photo');
-        $profile->userid = $_COOKIE['userid'];
 
-        $profile->save();
-        return $profile->userid;
+        dd($request->get('company'));
+//        $profile = new Profile();
+//        $profile->company = $request->input('company');
+//        $profile->position = $request->input('position');
+//        $profile->aboutme = $request->input('aboutme');
+//        $path = $request->file('photo')->store('uploads', 'public');
+//        $profile->photo = $path;
+//        $profile->memberid = $_COOKIE['userid'];
+//
+//        $profile->save();
+//        return $profile->memberid;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    public function getCSRF()
-    {
-        return csrf_token();
-    }
 }

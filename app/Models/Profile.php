@@ -16,9 +16,17 @@ class Profile extends Model
      */
     protected $fillable = [
         'company',
-        'postion',
+        'position',
         'aboutme',
         'photo',
+        'memberid',
+        'hide'
     ];
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'memberid');
+    }
+
 
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\MembersController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,17 +18,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-//Route::get('token', [MemberController::class, 'getCSRF']);
+Route::get('token', [MemberController::class, 'getCSRF']);
 //
 //Route::get('/', function () {
 //    return view('index');
-//});
+//});php
 
 
 
 Route::prefix('/api')->group(function (){
     Auth::routes();
-    Route::resource('submit', MemberController::class);
+    Route::post('submit_member', [MemberController::class, 'addMember']);
+    Route::post('submit_profile', [MemberController::class, 'addProfile']);
+    Route::get('countries', [CountryController::class, 'fetchAll'])->name('counties');
 
     Route::group(['middleware' => 'auth'], function () {
 //    Route::middleware('auth:api')->group(function (){
