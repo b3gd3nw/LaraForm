@@ -18,8 +18,8 @@ class CreateProfilesTable extends Migration
             $table->string('company');
             $table->string('position');
             $table->text('aboutme');
-            $table->string('photo');
-            $table->unsignedBigInteger('memberid')->nullable()->unsigned();
+            $table->string('photo')->nullable();
+            $table->bigInteger('memberid')->unsigned();
             $table->foreign('memberid')->references('id')->on('members')->onDelete('CASCADE');
             $table->boolean('hide')->default(0);
             $table->timestamps();

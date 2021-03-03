@@ -30,7 +30,9 @@ Route::prefix('/api')->group(function (){
     Auth::routes();
     Route::post('submit_member', [MemberController::class, 'addMember']);
     Route::post('submit_profile', [MemberController::class, 'addProfile']);
-    Route::get('countries', [CountryController::class, 'fetchAll'])->name('counties');
+    Route::get('countries', [CountryController::class, 'fetchAll'])->name('countries');
+    Route::get('all_members', [MemberController::class, 'allMembers']);
+    Route::get('members', [MemberController::class, 'getMembers']);
 
     Route::group(['middleware' => 'auth'], function () {
 //    Route::middleware('auth:api')->group(function (){

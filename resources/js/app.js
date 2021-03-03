@@ -24,6 +24,8 @@ Vue.component('header_map', require('./components/Header.vue').default);
 Vue.component('step-one', require('./components/First_step').default);
 Vue.component('step-two', require('./components/Second_step').default);
 Vue.component('reg-form', require('./components/Reg_form').default);
+Vue.component('social', require('./components/Social').default);
+Vue.component('all_members', require('./components/All_members').default);
 
 
 import Vue from 'vue'

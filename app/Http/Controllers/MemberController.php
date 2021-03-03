@@ -20,13 +20,13 @@ class MemberController extends Controller
     public function addMember(MemberRequest $request)
     {
         $member = new Member();
-        $member->firstname = $request->input('firstname');
-        $member->lastname = $request->input('lastname');
-        $member->birthdate = $request->input('birthdate');
-        $member->reportsubject = $request->input('reportsubject');
-        $member->countryId = $request->input('country');
-        $member->phone = $request->input('phone');
-        $member->email = $request->input('email');
+        $member->firstname = $request->firstname;
+        $member->lastname = $request->lastname;
+        $member->birthdate = $request->birthdate;
+        $member->reportsubject = $request->reportsubject;
+        $member->countryId = $request->countryId;
+        $member->phone = $request->phone;
+        $member->email = $request->email;
 
         $member->save();
 
@@ -44,18 +44,45 @@ class MemberController extends Controller
      */
     public function addProfile(ProfileRequest $request)
     {
+        $profile = new Profile();
+        $profile->company = $request->company;
+        $profile->position = $request->position;
+        $profile->aboutme = $request->aboutme;
+        $photo = $request->file('photo');
+        if ($photo != null) {
+            $profile->photo = $photo->store('uploads', 'public');
+        } else {
+            $profile->photo = null;
+        }
 
-        dd($request->get('company'));
-//        $profile = new Profile();
-//        $profile->company = $request->input('company');
-//        $profile->position = $request->input('position');
-//        $profile->aboutme = $request->input('aboutme');
-//        $path = $request->file('photo')->store('uploads', 'public');
-//        $profile->photo = $path;
-//        $profile->memberid = $_COOKIE['userid'];
-//
-//        $profile->save();
-//        return $profile->memberid;
+        $profile->memberid = $_COOKIE['userid'];
+
+        $profile->save();
+
+        return http_response_code(200);
+    }
+
+    public function allMembers()
+    {
+        $members_count = Member::all()->count();
+        return response()->json($members_count)->setStatusCode(200);
+    }
+
+    public function getMembers()
+    {
+        $profiles = Profile::orderBy('created_at', 'desc')->get();
+        $profile_arr = [];
+        foreach ($profiles as $profile) {
+            $profile_member_arr = $profile;
+            $profile_member_arr['member'] = $profile->member;
+            $profile_arr [] = $profile_member_arr;
+        }
+        return response()->json($profile_arr)->setStatusCode(200);
+    }
+
+    public function getCSRF()
+    {
+        return csrf_token();
     }
 
 }

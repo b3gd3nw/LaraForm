@@ -86,6 +86,6 @@ class MembersController extends Controller
     {
         $member->delete();
 
-        return redirect()->back()->withSuccess('Fuck OFF');
+        return redirect()->back()->withSuccess('Delete Success!');
     }
 }
