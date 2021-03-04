@@ -7,51 +7,65 @@
         </div>
         <div class="row">
             <div class="col-sm-12 text-center">
-                <form method="POST" id="form">
+                <ValidationObserver v-slot="{ handleSubmit }">
+                    <form @submit.prevent="handleSubmit(send)" method="POST" id="form">
                     <p>
                         <label for="company">Company</label>
-                        <input
-                            class="form-control"
-
-                            id="company"
-                            type="text"
-                            name="company"
-                        >
+                        <ValidationProvider rules="max:20|min:1" v-slot="{ errors }">
+                            <input
+                                class="form-control"
+                                v-model="formData.company"
+                                id="company"
+                                type="text"
+                                name="company"
+                            >
+                            <span class="text-danger">{{ errors[0] }}</span>
+                        </ValidationProvider>
                     </p>
                     <p>
                         <label for="position">Position</label>
-                        <input
-                            class="form-control"
-
-                            id="position"
-                            type="text"
-                            name="position"
-                        >
+                        <ValidationProvider rules="max:20|min:1" v-slot="{ errors }">
+                            <input
+                                class="form-control"
+                                v-model="formData.position"
+                                id="position"
+                                type="text"
+                                name="position"
+                            >
+                            <span class="text-danger">{{ errors[0] }}</span>
+                        </ValidationProvider>
                     </p>
                     <p>
                         <label for="aboutme">About Me</label>
-                        <textarea
-                            class="form-control"
-
-                            id="aboutme"
-                            type="text"
-                            name="aboutme"
-
-                        ></textarea>
+                        <ValidationProvider rules="max:200|min:1" v-slot="{ errors }">
+                            <textarea
+                                class="form-control"
+                                v-model="formData.aboutme"
+                                id="aboutme"
+                                type="text"
+                                name="aboutme"
+                            ></textarea>
+                            <span class="text-danger">{{ errors[0] }}</span>
+                        </ValidationProvider>
                     </p>
                     <p>
                         <label for="photo">Photo</label>
-                        <input
-                            class="form-control"
-                            id="photo"
-                            type="file"
-                            name="photo"
-                            accept="image/*"
-                            ref="photo"
-                        >
+                        <ValidationProvider rules="mimes:image/*" v-slot="{ errors, validate }">
+                            <input
+                                class="form-control"
+                                @change="validate"
+                                id="photo"
+                                type="file"
+                                name="photo"
+                                accept="image/*"
+                                ref="photo"
+                            >
+                            <span class="text-danger">{{ errors[0] }}</span>
+                        </ValidationProvider>
                     </p>
-                    <a @click="send" class="btn btn-primary btn-next">Next</a>
+                    <button type="submit" class="btn btn-primary btn-next">Next</button>
                 </form>
+                </ValidationObserver>
             </div>
         </div>
     </div>
@@ -59,6 +73,14 @@
 
 <script>
 export default {
+    data: () => ({
+        formData: {
+            company: '',
+            position: '',
+            aboutme: '',
+            photo: null,
+        }
+    }),
     methods: {
         send() {
             let formData = new FormData(document.getElementById('form'));

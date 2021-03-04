@@ -29,10 +29,6 @@ Vue.component('all_members', require('./components/All_members').default);
 
 
 import Vue from 'vue'
-import Vuelidate from 'vuelidate'
-Vue.use(Vuelidate)
-
-
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
@@ -41,6 +37,56 @@ Vue.use(VueAxios, axios)
 import VueCookie from 'vue-cookie'
 // Tell Vue to use the plugin
 Vue.use(VueCookie);
+
+
+//------VeeValidate----------
+import {ValidationProvider, extend, ValidationObserver} from 'vee-validate';
+import { required, email, max, min, mimes, alpha_spaces } from 'vee-validate/dist/rules';
+// Vue.use(ValidationProvider);
+// Add a rule.
+// No message specified.
+extend('email', email);
+
+// Override the default message.
+extend('required', {
+    ...required,
+    message: 'This field is required'
+});
+
+extend('max', {
+    ...max,
+    message: 'Enter no more than 20 characters'
+});
+extend('min', min);
+extend('mimes', {
+    ...mimes,
+    message: 'Try again with png or jpg file'
+});
+extend('alpha_spaces', alpha_spaces);
+
+// Register it globally
+Vue.component('ValidationProvider', ValidationProvider).default;
+Vue.component('ValidationObserver', ValidationObserver).default;
+//------VeeValidate----------
+
+import Datepicker from 'vuejs-datepicker';
+
+export default {
+    disabled: {
+        "from": "2021-03-05T12:53:00.000Z"
+    },
+    // ...
+    components: {
+        Datepicker
+    }
+    // ...
+}
+Vue.component('datepicker', Datepicker).default;
+
+import PhoneMaskInput from  "vue-phone-mask-input";
+
+Vue.component('phone-mask-input', PhoneMaskInput).default;
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

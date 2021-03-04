@@ -17,7 +17,7 @@
                                 <th>Name</th>
                                 <th>Report subject</th>
                                 <th>Email</th>
-                            </tr>d
+                            </tr>
                             </thead>
                             <tbody>
                             <tr v-for="member in members">

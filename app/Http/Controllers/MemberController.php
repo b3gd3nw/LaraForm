@@ -7,6 +7,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Models\Member;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
@@ -15,7 +16,7 @@ class MemberController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function addMember(MemberRequest $request)
     {
@@ -25,14 +26,24 @@ class MemberController extends Controller
         $member->birthdate = $request->birthdate;
         $member->reportsubject = $request->reportsubject;
         $member->countryId = $request->countryId;
-        $member->phone = $request->phone;
+        $member->phone = trim($request->phone, '+');
         $member->email = $request->email;
 
-        $member->save();
+        $email = DB::table('members')->where('email', $request->email)->first();
 
-        setcookie('userid', $member->id, 0, '/');
+        if ($email) {
+            return response()->json(['exists' => true]);
+        } else {
+            $member->save();
+            setcookie('userid', $member->id, 0, '/');
+            return response()->json(['exists' => false]);
+        }
 
-        return http_response_code(200);
+//        $member->save();
+
+//        setcookie('userid', $member->id, 0, '/');
+//
+//        return http_response_code(200);
     }
 
     /**
