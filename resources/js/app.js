@@ -41,7 +41,7 @@ Vue.use(VueCookie);
 
 //------VeeValidate----------
 import {ValidationProvider, extend, ValidationObserver} from 'vee-validate';
-import { required, email, max, min, mimes, alpha_spaces } from 'vee-validate/dist/rules';
+import { required, email, max, min, mimes, alpha_spaces, size } from 'vee-validate/dist/rules';
 // Vue.use(ValidationProvider);
 // Add a rule.
 // No message specified.
@@ -63,6 +63,11 @@ extend('mimes', {
     message: 'Try again with png or jpg file'
 });
 extend('alpha_spaces', alpha_spaces);
+
+extend('size', {
+    ...size,
+    message: 'Max photo size 2MB'
+});
 
 // Register it globally
 Vue.component('ValidationProvider', ValidationProvider).default;

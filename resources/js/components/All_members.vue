@@ -20,21 +20,21 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="member in members">
-                                <td scope="row">{{ member.member.id }}</td>
-                                <td v-if="member.photo != null">
-                                    <img class="user_photo"
-                                         :src="'/storage/' + member.photo"
-                                         alt="user_photo">
-                                </td>
-                                <td v-else>
-                                    <img class="user_photo"
-                                         src="https://randomuser.me/api/portraits/lego/6.jpg"
-                                         alt="user_photo">
-                                </td>
-                                <td>{{ member.member.firstname }} {{ member.member.lastname }}</td>
-                                <td class="report_subject">{{ member.member.reportsubject}}</td>
-                                <td><a href="mailto:">{{ member.member.email }}</a></td>
+                            <tr v-if="member.hide === 0" v-for="member in members">
+                                    <td scope="row">{{ member.member.id }}</td>
+                                    <td v-if="member.photo != null">
+                                        <img class="user_photo"
+                                             :src="'/storage/' + member.photo"
+                                             alt="user_photo">
+                                    </td>
+                                    <td v-else>
+                                        <img class="user_photo"
+                                             src="https://randomuser.me/api/portraits/lego/6.jpg"
+                                             alt="user_photo">
+                                    </td>
+                                    <td>{{ member.member.firstname }} {{ member.member.lastname }}</td>
+                                    <td class="report_subject">{{ member.member.reportsubject}}</td>
+                                    <td><a href="mailto:">{{ member.member.email }}</a></td>
                             </tr>
                             </tbody>
                         </table>

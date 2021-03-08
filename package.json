@@ -11,11 +11,11 @@
     },
     "devDependencies": {
         "axios": "^0.21.1",
-        "bootstrap": "^4.0.0",
-        "jquery": "^3.2",
+        "bootstrap": "^4.5.2",
+        "jquery": "^3.4.1",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "popper.js": "^1.12",
+        "popper.js": "^1.16.1",
         "postcss": "^8.1.14",
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.20.1",
@@ -27,6 +27,8 @@
     "dependencies": {
         "@braid/vue-formulate": "^2.5.0",
         "moment": "^2.29.1",
+        "prismjs": "^1.23.0",
+        "vanilla-lazyload": "^17.3.1",
         "vee-validate": "^3.4.5",
         "vue-axios": "^3.2.4",
         "vue-cookie": "^1.1.4",

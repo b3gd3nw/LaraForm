@@ -50,7 +50,7 @@
                     </p>
                     <p>
                         <label for="photo">Photo</label>
-                        <ValidationProvider rules="mimes:image/*" v-slot="{ errors, validate }">
+                        <ValidationProvider rules="mimes:image/*|size:2000" v-slot="{ errors, validate }">
                             <input
                                 class="form-control"
                                 @change="validate"
@@ -84,6 +84,7 @@ export default {
     methods: {
         send() {
             let formData = new FormData(document.getElementById('form'));
+
             axios.post('/api/submit_profile', formData)
                 .then(responce=> {
                 if(responce['data'] === 200){

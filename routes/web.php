@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\MembersController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,8 @@ Route::prefix('/api')->group(function (){
         Route::middleware(['role:admin'])->prefix('admin_panel')->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
 
+//            Route::get('/edit', [\App\Http\Controllers\Admin\HomeController::class, 'openEdit'])->name('openEdit');
+            Route::resource('profile', ProfileController::class);
             Route::resource('member', MembersController::class);
         });
     });

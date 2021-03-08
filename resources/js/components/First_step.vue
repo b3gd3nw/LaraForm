@@ -76,24 +76,17 @@
                             </ValidationProvider>
                         </p>
                         <p>
-
                             <label>Phone</label>
                             <br>
                             <ValidationProvider rules="required|max:20|min:1" v-slot="{ errors }">
                                 <phone-mask-input
-                                    v-model="formData.phone"
+                                    v-model="phone"
                                     showFlag
                                     inputClass="form-control"
                                     flagClass="flag-example"
+                                    id="phone"
                                     >
                                 </phone-mask-input>
-<!--                                <input-->
-<!--                                    v-model="formData.phone"-->
-<!--                                    class="form-control"-->
-<!--                                    id="phone"-->
-<!--                                    type="text"-->
-<!--                                    name="phone"-->
-<!--                                >-->
                                 <span class="text-danger">{{ errors[0] }}</span>
                             </ValidationProvider>
                         </p>
@@ -117,6 +110,7 @@
                 </ValidationObserver>
             </div>
         </div>
+        <div>{{ formData.phone }}</div>
     </div>
 </template>
 
@@ -143,6 +137,7 @@ export default {
                    phone: '',
                    email: ''
                },
+               phone: '',
                disabledDates: {
                    from: new Date(moment().format('YYYY.MM.DD'))
                },
@@ -151,6 +146,7 @@ export default {
     methods: {
         send() {
             let formData = new FormData(document.getElementById("form"));
+            formData.append('phone_number', this.phone);
             axios.post(
                 '/api/submit_member', formData)
                 .then(responce=> {

@@ -15,4 +15,6 @@ class HomeController extends Controller
             'members_count' => $members_count
         ]);
     }
+
+
 }

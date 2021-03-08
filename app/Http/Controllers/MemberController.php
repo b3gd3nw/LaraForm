@@ -26,7 +26,7 @@ class MemberController extends Controller
         $member->birthdate = $request->birthdate;
         $member->reportsubject = $request->reportsubject;
         $member->countryId = $request->countryId;
-        $member->phone = trim($request->phone, '+');
+        $member->phone = $request->phone_number;
         $member->email = $request->email;
 
         $email = DB::table('members')->where('email', $request->email)->first();
