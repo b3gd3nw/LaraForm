@@ -15,9 +15,9 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('company');
-            $table->string('position');
-            $table->text('aboutme');
+            $table->string('company')->nullable();
+            $table->string('position')->nullable();
+            $table->text('aboutme')->nullable();
             $table->string('photo')->nullable();
             $table->bigInteger('memberid')->unsigned();
             $table->foreign('memberid')->references('id')->on('members')->onDelete('CASCADE');

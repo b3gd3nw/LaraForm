@@ -48,16 +48,15 @@ class ProfileController extends Controller
     public function show($id)
     {
         $profile = Profile::find($id);
-        if( $profile->hide === 0){
+        if ($profile->hide === 0) {
             $profile->hide = 1;
             $profile->save();
             return redirect()->back()->withSuccess('Member was hide');
-        }else {
+        } else {
             $profile->hide = 0;
             $profile->save();
             return redirect()->back()->withSuccess('Member was show');
         }
-
     }
 
     /**
@@ -95,7 +94,7 @@ class ProfileController extends Controller
             'company' => 'max:100',
             'position' => 'max:100',
             'aboutme' => 'max:500',
-            'photo' => 'size:2048|mimes:png,jpg|image'
+            'photo' => 'max:20000|mimes:png,jpg|image'
         ]);
 
         $profile->save();

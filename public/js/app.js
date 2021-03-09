@@ -1909,7 +1909,6 @@ __webpack_require__.r(__webpack_exports__);
     var self = this;
     axios.get('/api/members').then(function (response) {
       self.members = response.data;
-      console.log(response.data);
     });
   }
 });

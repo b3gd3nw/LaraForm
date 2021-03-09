@@ -38,12 +38,6 @@ class MemberController extends Controller
             setcookie('userid', $member->id, 0, '/');
             return response()->json(['exists' => false]);
         }
-
-//        $member->save();
-
-//        setcookie('userid', $member->id, 0, '/');
-//
-//        return http_response_code(200);
     }
 
     /**
@@ -90,10 +84,4 @@ class MemberController extends Controller
         }
         return response()->json($profile_arr)->setStatusCode(200);
     }
-
-    public function getCSRF()
-    {
-        return csrf_token();
-    }
-
 }

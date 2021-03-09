@@ -20,5 +20,4 @@ class Member extends Model
     {
         return $this->hasOne(Profile::class);
     }
-
 }

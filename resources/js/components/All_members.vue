@@ -64,7 +64,6 @@ export default {
         axios.get('/api/members')
             .then(response => {
                 self.members = response.data
-                console.log(response.data);
             });
     }
 }

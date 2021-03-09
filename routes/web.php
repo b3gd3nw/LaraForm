@@ -19,11 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('token', [MemberController::class, 'getCSRF']);
-//
-//Route::get('/', function () {
-//    return view('index');
-//});php
+
 
 
 
@@ -36,11 +32,9 @@ Route::prefix('/api')->group(function (){
     Route::get('members', [MemberController::class, 'getMembers']);
 
     Route::group(['middleware' => 'auth'], function () {
-//    Route::middleware('auth:api')->group(function (){
         Route::middleware(['role:admin'])->prefix('admin_panel')->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
 
-//            Route::get('/edit', [\App\Http\Controllers\Admin\HomeController::class, 'openEdit'])->name('openEdit');
             Route::resource('profile', ProfileController::class);
             Route::resource('member', MembersController::class);
         });

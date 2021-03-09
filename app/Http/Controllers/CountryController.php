@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Country;
 use Illuminate\Http\Request;
 
-
 class CountryController extends Controller
 {
     public function fetchAll()
@@ -13,5 +12,4 @@ class CountryController extends Controller
         $countries = Country::all();
         return response()->json($countries)->setStatusCode(200);
     }
-
 }

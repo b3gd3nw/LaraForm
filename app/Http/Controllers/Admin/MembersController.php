@@ -72,7 +72,6 @@ class MembersController extends Controller
     public function edit(Member $member)
     {
         $profile = $member->profile;
-//        return view('components.')
     }
 
     /**
@@ -99,7 +98,7 @@ class MembersController extends Controller
             'birthdate' => 'required|date|before:now',
             'reportsubject' => 'required|max:100',
             'countryId' => 'required',
-            'email' => 'required|unique:members|regex:/^[^@\s]+@[^@\s]+\.[^@\s]+$/',
+            'email' => 'required|regex:/^[^@\s]+@[^@\s]+\.[^@\s]+$/',
             'phone' => 'required'
 
         ]);
