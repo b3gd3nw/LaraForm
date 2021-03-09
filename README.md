@@ -21,13 +21,14 @@
     7. Включаем ссылку для хранилища фотографий php artisan storage:link
     8. Устанавливаем ключ шифрования сессий и кук php artisan key:generate
     
-    ###Endpoints
+    ### Endpoints
 
    | point  | value |
-          | ------------- | ------------- |
+   | ------------- | ------------- |
    | / | home  |
    | /api/admin_panel | admin panel  |
    | /all_members | All Members page  |
+   
     ****
    Всё готово.
     
