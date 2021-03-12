@@ -40,8 +40,36 @@ Vue.use(VueCookie);
 
 
 //------VeeValidate----------
+import { Validator} from 'vee-validate';
 import {ValidationProvider, extend, ValidationObserver} from 'vee-validate';
-import { required, email, max, min, mimes, alpha_spaces, size } from 'vee-validate/dist/rules';
+import { required, email, max, min, mimes, alpha_spaces, size, custom } from 'vee-validate/dist/rules';
+import { localize } from 'vee-validate';
+
+localize({
+    en: {
+        fields: {
+            firstname: {
+                max: 'Enter no more than 20 characters',
+            },
+            lastname: {
+                max: 'Enter no more than 20 characters',
+            },
+            reportsubject: {
+                max: 'Enter no more than 200 characters',
+            },
+            company: {
+                max: 'Enter no more than 200 characters',
+            },
+            position: {
+                max: 'Enter no more than 200 characters',
+            },
+            aboutme: {
+                max: 'Enter no more than 200 characters',
+            },
+
+        }
+    }
+});
 // Vue.use(ValidationProvider);
 // Add a rule.
 // No message specified.
@@ -55,14 +83,25 @@ extend('required', {
 
 extend('max', {
     ...max,
-    message: 'Enter no more than 20 characters'
+    firstname: {
+        message: 'Enter no more than 20 characters'
+    },
+    lastname: {
+        message: 'Enter no more than 20 characters'
+    },
+    reportsubject: {
+        message: 'Enter no more than 200 characters'
+    }
 });
 extend('min', min);
 extend('mimes', {
     ...mimes,
     message: 'Try again with png or jpg file'
 });
-extend('alpha_spaces', alpha_spaces);
+extend('alpha_spaces', {
+    ...alpha_spaces,
+    message: 'Letters only, please'
+});
 
 extend('size', {
     ...size,
@@ -91,6 +130,10 @@ Vue.component('datepicker', Datepicker).default;
 import PhoneMaskInput from  "vue-phone-mask-input";
 
 Vue.component('phone-mask-input', PhoneMaskInput).default;
+
+import ResetInput from 'v-reset-input'
+
+Vue.use(ResetInput)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

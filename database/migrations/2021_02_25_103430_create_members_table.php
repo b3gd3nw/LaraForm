@@ -22,6 +22,11 @@ class CreateMembersTable extends Migration
             $table->foreignId('countryId')->references('id')->on('countries');
             $table->string('phone');
             $table->string('email')->unique();
+            $table->string('company')->nullable();
+            $table->string('position')->nullable();
+            $table->text('aboutme')->nullable();
+            $table->string('photo')->nullable();
+            $table->boolean('hide')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

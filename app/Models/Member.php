@@ -15,9 +15,4 @@ class Member extends Model
     {
         return $this->belongsTo(Country::class, 'countryId');
     }
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
-    }
 }

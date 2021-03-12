@@ -25,17 +25,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/api')->group(function (){
     Auth::routes();
-    Route::post('submit_member', [MemberController::class, 'addMember']);
-    Route::post('submit_profile', [MemberController::class, 'addProfile']);
+
+    Route::get( 'all_members', [MemberController::class, 'all_members']);
+    Route::resource( 'members', MemberController::class);
     Route::get('countries', [CountryController::class, 'fetchAll'])->name('countries');
-    Route::get('all_members', [MemberController::class, 'allMembers']);
-    Route::get('members', [MemberController::class, 'getMembers']);
 
     Route::group(['middleware' => 'auth'], function () {
         Route::middleware(['role:admin'])->prefix('admin_panel')->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
 
-            Route::resource('profile', ProfileController::class);
             Route::resource('member', MembersController::class);
         });
     });

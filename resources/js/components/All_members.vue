@@ -21,7 +21,7 @@
                             </thead>
                             <tbody>
                             <tr v-if="member.hide === 0" v-for="member in members">
-                                    <td scope="row">{{ member.member.id }}</td>
+                                    <td scope="row">{{ member.id }}</td>
                                     <td v-if="member.photo != null">
                                         <img class="user_photo"
                                              :src="'/storage/' + member.photo"
@@ -32,9 +32,9 @@
                                              src="https://randomuser.me/api/portraits/lego/6.jpg"
                                              alt="user_photo">
                                     </td>
-                                    <td>{{ member.member.firstname }} {{ member.member.lastname }}</td>
-                                    <td class="report_subject">{{ member.member.reportsubject}}</td>
-                                    <td><a href="mailto:">{{ member.member.email }}</a></td>
+                                    <td>{{ member.firstname }} {{ member.lastname }}</td>
+                                    <td class="report_subject">{{ member.reportsubject}}</td>
+                                    <td><a href="mailto:">{{ member.email }}</a></td>
                             </tr>
                             </tbody>
                         </table>
@@ -61,7 +61,7 @@ export default {
     },
     mounted() {
         let self = this
-        axios.get('/api/members')
+        axios.get('/api/all_members')
             .then(response => {
                 self.members = response.data
             });

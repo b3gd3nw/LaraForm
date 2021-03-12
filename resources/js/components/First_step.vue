@@ -18,12 +18,12 @@
                                     id="firstname"
                                     type="text"
                                     name="firstname"
+
                                 >
                                 <span  class="text-danger">{{ errors[0] }}</span>
                             </ValidationProvider>
                         </p>
                         <p>
-
                             <label for="lastname">Last Name</label>
                             <ValidationProvider rules="required|max:20|min:1|alpha_spaces" v-slot="{ errors }">
                                 <input
@@ -81,9 +81,7 @@
                             <ValidationProvider rules="required|max:20|min:1" v-slot="{ errors }">
                                 <phone-mask-input
                                     v-model="phone"
-                                    showFlag
                                     inputClass="form-control"
-                                    flagClass="flag-example"
                                     id="phone"
                                     >
                                 </phone-mask-input>
@@ -148,7 +146,7 @@ export default {
             let formData = new FormData(document.getElementById("form"));
             formData.append('phone_number', this.phone);
             axios.post(
-                '/api/submit_member', formData)
+                '/api/members', formData)
                 .then(responce=> {
                 if(responce['data']['exists'] === true){
                     this.error_mail = 'Your email already use'

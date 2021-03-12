@@ -17,14 +17,9 @@ class MembersController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::orderBy('created_at', 'desc')->get();
-        $members = [];
-        foreach ($profiles as $profile) {
-            $profile_member_arr = $profile;
-            $profile_member_arr['member'] = $profile->member;
-            $members [] = $profile_member_arr;
-        }
+        $members = Member::orderBy('created_at', 'desc')->get();
         $countries = Country::all();
+
         return view('admin.members.index', [
             'members' => $members,
             'countries' => $countries
@@ -60,7 +55,16 @@ class MembersController extends Controller
      */
     public function show(Member $member)
     {
-        //
+//        $member = Profile::find($member);
+        if ($member->hide === 0) {
+            $member->hide = 1;
+            $member->save();
+            return redirect()->back()->withSuccess('Member was hide');
+        } else {
+            $member->hide = 0;
+            $member->save();
+            return redirect()->back()->withSuccess('Member was show');
+        }
     }
 
     /**
@@ -91,16 +95,29 @@ class MembersController extends Controller
         $member->countryId = $request->countryId;
         $member->phone = $request->phone;
         $member->email = $request->email;
+        $member->company = $request->company;
+        $member->position = $request->position;
+        $member->aboutme = $request->aboutme;
+        $photo = $request->file('photo');
+        if ($photo != null) {
+            $member->photo = $photo->store('uploads', 'public');
+        } else {
+            $member->photo = $member->photo;
+        }
+
 
         $validation = $request->validate([
             'firstname' => 'required|max:100',
             'lastname' => 'required|max:100',
-            'birthdate' => 'required|date|before:now',
+            'birthdate' => 'required|date',
             'reportsubject' => 'required|max:100',
             'countryId' => 'required',
             'email' => 'required|regex:/^[^@\s]+@[^@\s]+\.[^@\s]+$/',
-            'phone' => 'required'
-
+            'phone' => 'required',
+            'company' => 'max:100',
+            'position' => 'max:100',
+            'aboutme' => 'max:500',
+            'photo' => 'max:20000|mimes:png,jpg|image'
         ]);
 
         $member->save();

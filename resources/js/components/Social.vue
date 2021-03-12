@@ -36,7 +36,7 @@ export default {
     name: "Social",
     mounted() {
         let self = this
-        axios.get('/api/all_members')
+        axios.get('/api/members')
             .then(response => {
                 self.counter = response.data
             });

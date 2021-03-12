@@ -74,102 +74,72 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{ $member['member']['firstname'] . ' ' . $member['member']['lastname'] }}
+                                    {{ $member['firstname'] . ' ' . $member['lastname'] }}
                                 </td>
                                 <td class="project_progress">
-                                  {{ $member['member']['country']['name'] }}
+                                  {{ $member['country']['name'] }}
                                 </td>
                                 <td class="project-state">
-                                    <a href="mailto:{{ $member['email'] }}">{{ $member['member']['email'] }}</a>
+                                    <a href="mailto:{{ $member['email'] }}">{{ $member['email'] }}</a>
                                 </td>
                                 <td class="project-actions text-right">
                                     <div class="row justify-content-end">
                                         <div class="col-sm-4 text-center mx-auto">
                                             <!-- Button trigger modal 1 -->
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#memberModal{{$member['member']['id']}}">
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#memberModal{{ $member['id'] }}">
                                                 <i class="fas fa-edit">
                                                 </i>
                                                 Edit Member
                                             </button>
-                                            <!-- Button trigger modal 2 -->
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#profileModal{{$member['id']}}">
-                                                <i class="fas fa-edit">
-                                                </i>
-                                                Edit Profile
-                                            </button>
                                             <!-- Modal 1 -->
-                                            <div class="modal fade" id="memberModal{{ $member['member']['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="memberModal{{ $member['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel{{ $member['member']['id']}}">Edit info member #{{ $member['member']['id']}}</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel{{ $member['id']}}">Edit info member #{{ $member['id']}}</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="POST" action="{{ route('member.update', $member['member']['id']) }}">
+                                                            <form method="POST" action="{{ route('member.update', $member['id']) }}" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
 
                                                                 <div class="form-group">
-                                                                    <label for="firstname{{ $member['member']['id']}}">First Name</label>
-                                                                    <input name="firstname" type="text" class="form-control" id="firstname{{ $member['member']['id']}}" value="{{ $member['member']['firstname'] }}">
+                                                                    <label for="firstname{{ $member['id']}}">First Name</label>
+                                                                    <input name="firstname" type="text" class="form-control" id="firstname{{ $member['id']}}" value="{{ $member['firstname'] }}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="lastname{{ $member['member']['id']}}">Last Name</label>
-                                                                    <input name="lastname" type="text" class="form-control" id="lastname{{ $member['member']['id']}}" value="{{ $member['member']['lastname'] }}">
+                                                                    <label for="lastname{{ $member['id']}}">Last Name</label>
+                                                                    <input name="lastname" type="text" class="form-control" id="lastname{{ $member['id']}}" value="{{ $member['lastname'] }}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="birthdate{{ $member['member']['id']}}">Birth Date</label>
-                                                                    <input name="birthdate" type="date" class="form-control" id="birthdate{{ $member['member']['id']}}" value="{{ $member['member']['birthdate'] }}">
+                                                                    <label for="birthdate{{ $member['id']}}">Birth Date</label>
+                                                                    <input name="birthdate" type="text" class="form-control" id="birthdate{{ $member['id']}}" value="{{ $member['birthdate'] }}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="reportsubject{{ $member['member']['id']}}">Report Subject</label>
-                                                                    <input name="reportsubject" type="text" class="form-control" id="reportsubject{{ $member['member']['id']}}" value="{{ $member['member']['reportsubject'] }}">
+                                                                    <label for="reportsubject{{ $member['id']}}">Report Subject</label>
+                                                                    <input name="reportsubject" type="text" class="form-control" id="reportsubject{{ $member['id']}}" value="{{ $member['reportsubject'] }}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="countryId{{ $member['member']['id']}}">Counrty</label>
-                                                                    <select name="countryId" class="form-control" id="countryId{{ $member['member']['id']}}" required>
+                                                                    <label for="countryId{{ $member['id']}}">Counrty</label>
+                                                                    <select name="countryId" class="form-control" id="countryId{{ $member['id']}}" required>
                                                                         @foreach($countries as $country)
-                                                                            <option value="{{ $country['id'] }}" @if ($country['id'] == $member['member']['countryId']) selected
+                                                                            <option value="{{ $country['id'] }}" @if ($country['id'] == $member['countryId']) selected
                                                                                 @endif>{{ $country['name'] }}</option>
                                                                         @endforeach
                                                                     </select>
 
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="phone{{ $member['member']['id']}}">Phone</label>
-                                                                    <input name="phone" type="text" class="form-control" id="phone{{ $member['member']['id']}}" value="{{ $member['member']['phone'] }}">
+                                                                    <label for="phone{{ $member['id']}}">Phone</label>
+                                                                    <input name="phone" type="text" class="form-control" id="phone{{ $member['id']}}" value="{{ $member['phone'] }}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="{{ $member['member']['id']}}">Email address</label>
-                                                                    <input name="email" type="email" class="form-control" id="email{{ $member['member']['id']}}" value="{{ $member['member']['email'] }}">
+                                                                    <label for="{{ $member['id']}}">Email address</label>
+                                                                    <input name="email" type="email" class="form-control" id="email{{ $member['id']}}" value="{{ $member['email'] }}">
                                                                 </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary {{ $member['member']['id']}}">Save changes</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Modal 2 -->
-                                            <div class="modal fade" id="profileModal{{ $member['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel{{ $member['id']}}">Edit profile member #{{ $member['member']['id']}}</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form method="POST" action="{{ route('profile.update', $member['id']) }}" enctype="multipart/form-data">
-                                                                @csrf
-                                                                @method('PUT')
                                                                 <div class="form-group">
                                                                     <label for="company{{ $member['id']}}">Company</label>
                                                                     <input type="text" class="form-control" id="copmpany{{ $member['id']}}" value="{{ $member['company'] }}" name="company">
@@ -186,12 +156,14 @@
                                                                     <label for="photo{{ $member['id']}}">Photo</label>
                                                                     <input type="file" class="form-control" id="photo{{ $member['id']}}" name="photo">
                                                                 </div>
+
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary {{ $member['member']['id']}}">Save changes</button>
+                                                                    <button type="submit" class="btn btn-primary {{ $member['id']}}">Save changes</button>
                                                                 </div>
                                                             </form>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -206,7 +178,7 @@
                                                     Delete
                                                 </button>
                                             </form>
-                                            <form action="{{ route('profile.show', $member['id'])  }}" method="GET">
+                                            <form action="{{ route('member.show', $member['id'])  }}" method="GET">
                                                 @csrf
                                                 @if($member['hide'] === 0)
                                                     <button type="submit" class="btn btn-warning btn-sm">
