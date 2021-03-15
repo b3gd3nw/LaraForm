@@ -27,6 +27,8 @@
     },
     "dependencies": {
         "@braid/vue-formulate": "^2.5.0",
+        "datetimepicker": "^0.1.39",
+        "inputmask": "^5.0.5",
         "moment": "^2.29.1",
         "prismjs": "^1.23.0",
         "vanilla-lazyload": "^17.3.1",

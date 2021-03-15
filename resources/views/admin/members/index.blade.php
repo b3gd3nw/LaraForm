@@ -116,7 +116,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="birthdate{{ $member['id']}}">Birth Date</label>
-                                                                    <input name="birthdate" type="text" class="form-control" id="birthdate{{ $member['id']}}" value="{{ $member['birthdate'] }}">
+                                                                    <input readonly="readonly" name="birthdate" type="text" class="form-control" id="birthdate{{ $member['id']}}" value="{{ $member['birthdate'] }}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="reportsubject{{ $member['id']}}">Report Subject</label>
@@ -134,7 +134,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="phone{{ $member['id']}}">Phone</label>
-                                                                    <input name="phone" type="text" class="form-control" id="phone{{ $member['id']}}" value="{{ $member['phone'] }}">
+                                                                    <input name="phone" type="text" class="form-control phone" id="phone{{ $member['id']}}" value="{{ $member['phone'] }}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="{{ $member['id']}}">Email address</label>

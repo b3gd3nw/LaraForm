@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MemberRequest;
 use App\Models\Country;
 use App\Models\Member;
 use App\Models\Profile;
@@ -86,7 +87,7 @@ class MembersController extends Controller
      * @param Profile $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Member $member)
+    public function update(MemberRequest $request, Member $member)
     {
         $member->firstname = $request->firstname;
         $member->lastname = $request->lastname;
@@ -94,6 +95,7 @@ class MembersController extends Controller
         $member->reportsubject = $request->reportsubject;
         $member->countryId = $request->countryId;
         $member->phone = $request->phone;
+        $email = $member->email;
         $member->email = $request->email;
         $member->company = $request->company;
         $member->position = $request->position;
@@ -105,20 +107,11 @@ class MembersController extends Controller
             $member->photo = $member->photo;
         }
 
-
-        $validation = $request->validate([
-            'firstname' => 'required|max:100',
-            'lastname' => 'required|max:100',
-            'birthdate' => 'required|date',
-            'reportsubject' => 'required|max:100',
-            'countryId' => 'required',
-            'email' => 'required|regex:/^[^@\s]+@[^@\s]+\.[^@\s]+$/',
-            'phone' => 'required',
-            'company' => 'max:100',
-            'position' => 'max:100',
-            'aboutme' => 'max:500',
-            'photo' => 'max:20000|mimes:png,jpg|image'
-        ]);
+        if ( $email != $request->email ) {
+            $validation = $request->validate([
+               'email' => 'unique:members'
+            ]);
+        }
 
         $member->save();
 

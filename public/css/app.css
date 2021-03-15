@@ -10803,3 +10803,6 @@ h3 {
   line-height: 1.5;
   margin-bottom: 0.25em;
 }
+form .form-group .group a {
+    border-radius: 50%;
+}
