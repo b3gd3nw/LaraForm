@@ -34,7 +34,7 @@ class MemberRequest extends FormRequest
             'company' => 'max:100',
             'position' => 'max:100',
             'aboutme' => 'max:500',
-            'photo' => 'max:2048 | mimes:jpeg,jpg,png | image'
+            'photo' => 'max:2048|mimes:jpeg,jpg,png|image'
         ];
     }
 }
