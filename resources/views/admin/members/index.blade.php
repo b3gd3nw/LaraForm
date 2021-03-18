@@ -102,7 +102,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="POST" action="{{ route('member.update', $member['id']) }}" enctype="multipart/form-data">
+                                                            <form id="form" method="POST" action="{{ route('member.update', $member['id']) }}" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
 
@@ -156,10 +156,10 @@
                                                                     <label for="photo{{ $member['id']}}">Photo</label>
                                                                     <input type="file" class="form-control" id="photo{{ $member['id']}}" name="photo">
                                                                 </div>
-
+                                                                <div id="photo-size-error"></div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary {{ $member['id']}}">Save changes</button>
+                                                                    <button id="submit" type="submit" class="btn btn-primary {{ $member['id']}}">Save changes</button>
                                                                 </div>
                                                             </form>
                                                         </div>

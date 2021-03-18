@@ -42,7 +42,7 @@ Vue.use(VueCookie);
 //------VeeValidate----------
 import { Validator} from 'vee-validate';
 import {ValidationProvider, extend, ValidationObserver} from 'vee-validate';
-import { required, email, max, min, mimes, alpha_spaces, size, custom } from 'vee-validate/dist/rules';
+import { required, email, max, min, mimes, alpha_spaces, size, regex } from 'vee-validate/dist/rules';
 import { localize } from 'vee-validate';
 
 localize({
@@ -75,6 +75,8 @@ localize({
 // No message specified.
 extend('email', email);
 
+extend('regex', regex);
+
 // Override the default message.
 extend('required', {
     ...required,
@@ -100,7 +102,7 @@ extend('mimes', {
 });
 extend('alpha_spaces', {
     ...alpha_spaces,
-    message: 'Letters only, please'
+    message: 'Use only letters and one language, please'
 });
 
 extend('size', {

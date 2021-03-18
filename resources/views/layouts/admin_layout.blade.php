@@ -133,6 +133,8 @@
 <script src="{{ URL::asset('/admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ URL::asset('/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+<script src={{ URL::asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js') }}></script>
+<script src={{ URL::asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js') }}></script>
 <!-- AdminLTE App -->
 <script src="{{ URL::asset('admin/dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

@@ -11,7 +11,7 @@
                     <form @submit.prevent="handleSubmit(send)" method="POST" id="form">
                         <p>
                             <label for="firstname">First Name</label>
-                            <ValidationProvider rules="required|max:20|min:1|alpha_spaces" v-slot="{ errors }">
+                            <ValidationProvider :rules="{ alpha_spaces:true, required: true, regex: /^[A-Za-zА-Яа-яЁё ]|[a-zA-ZáéíñóúüÁÉÍÑÓÚÜ]|[a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ]|[a-pr-uwy-zA-PR-UWY-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]|[a-zA-ZäöüßÄÖÜẞ]|[a-zA-ZàâäôéèëêïîçùûüÿæœÀÂÄÔÉÈËÊÏÎŸÇÙÛÜÆŒ]|[\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufc3f]|[\ufe70-\ufefc]$/ }" v-slot="{ errors }">
                                 <input
                                     v-model="formData.firstname"
                                     class="form-control"
@@ -25,7 +25,7 @@
                         </p>
                         <p>
                             <label for="lastname">Last Name</label>
-                            <ValidationProvider rules="required|max:20|min:1|alpha_spaces" v-slot="{ errors }">
+                            <ValidationProvider :rules="{ alpha_spaces:true, required: true, regex: /^[A-Za-zА-Яа-яЁё ]|[a-zA-ZáéíñóúüÁÉÍÑÓÚÜ]|[a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ]|[a-pr-uwy-zA-PR-UWY-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]|[a-zA-ZäöüßÄÖÜẞ]|[a-zA-ZàâäôéèëêïîçùûüÿæœÀÂÄÔÉÈËÊÏÎŸÇÙÛÜÆŒ]|[\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufc3f]|[\ufe70-\ufefc]$/ }" v-slot="{ errors }">
                                 <input
                                     v-model="formData.lastname"
                                     class="form-control"
