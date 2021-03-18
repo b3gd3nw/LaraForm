@@ -1,3 +1,7 @@
 form .form-group .group a {
     border-radius: 50%;
 }
+
+.error {
+    color: red;
+}
