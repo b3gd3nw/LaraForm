@@ -122,7 +122,7 @@
 <script src="{{ URL::asset('/admin/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
 <!-- jQuery Knob Chart -->
 <script src="{{ URL::asset('/admin/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
-<!-- daterangepicker -->
+<!-- Moment -->
 <script src="{{ URL::asset('/admin/plugins/moment/moment.min.js') }}"></script>
 <script src="{{ URL::asset('/admin/plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
@@ -133,6 +133,7 @@
 <script src="{{ URL::asset('/admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ URL::asset('/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+<!-- JQuery Validate -->
 <script src={{ URL::asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js') }}></script>
 <script src={{ URL::asset('https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js') }}></script>
 <!-- AdminLTE App -->

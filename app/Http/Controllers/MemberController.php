@@ -37,15 +37,10 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        $member = new Member();
-        $member->firstname = $request->firstname;
-        $member->lastname = $request->lastname;
-        $member->birthdate = $request->birthdate;
-        $member->reportsubject = $request->reportsubject;
-        $member->countryId = $request->countryId;
-        $member->phone = $request->phone_number;
-        $member->email = $request->email;
-
+//        dd($request->all());
+        $member = Member::create([
+            $request->all()
+        ]);
         $email = DB::table('members')->where('email', $request->email)->first();
 
         if ($email) {

@@ -11,6 +11,18 @@ class Member extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'firstname',
+        'lastname',
+        'countryId',
+        'phone',
+        'email',
+        'company',
+        'position',
+        'aboutme',
+        'photo'
+    ];
+
     public function country()
     {
         return $this->belongsTo(Country::class, 'countryId');
