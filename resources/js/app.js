@@ -124,18 +124,9 @@ Vue.component('ValidationProvider', ValidationProvider).default;
 Vue.component('ValidationObserver', ValidationObserver).default;
 //------VeeValidate----------
 
+//------VueJs Datepicker----------
 import Datepicker from 'vuejs-datepicker';
 
-export default {
-    disabled: {
-        "from": "2021-03-05T12:53:00.000Z"
-    },
-    // ...
-    components: {
-        Datepicker
-    }
-    // ...
-}
 Vue.component('datepicker', Datepicker).default;
 
 import PhoneMaskInput from  "vue-phone-mask-input";

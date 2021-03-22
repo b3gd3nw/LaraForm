@@ -37,7 +37,6 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
 
         $email = DB::table('members')->where('email', $request->email)->first();
 
@@ -83,7 +82,6 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
         $data = $request->except('_method');
         $photo = $request->file('photo');
         if ($photo != null) {

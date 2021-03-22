@@ -5,3 +5,17 @@ form .form-group .group a {
 .error {
     color: red;
 }
+
+.group {
+    position: relative;
+}
+.clear-btn {
+    border-radius: 50px !important;
+    width: 25px;
+    height: 25px;
+    padding: 0 !important;
+    position: absolute;
+    top: 37px;
+    right: 10px;
+    color: red;
+}

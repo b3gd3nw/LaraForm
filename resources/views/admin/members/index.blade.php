@@ -102,7 +102,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form id="form" method="POST" action="{{ route('member.update', $member['id']) }}" enctype="multipart/form-data">
+                                                            <form id="form{{ $member['id'] }}" method="POST" action="{{ route('member.update', $member['id']) }}" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
 
@@ -152,15 +152,14 @@
                                                                     <label for="aboutme{{ $member['id']}}">About Me</label>
                                                                     <input type="text" class="form-control" id="aboutme{{ $member['id']}}" value="{{ $member['company'] }}" name="aboutme">
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group group">
                                                                     <label for="photo{{ $member['id']}}">Photo</label>
                                                                     <input type="file" class="form-control" id="photo{{ $member['id']}}" name="photo">
+                                                                    <button type="button" id="{{ $member['id']}}" class="clear-btn btn btn-outline-danger">x</button>
                                                                 </div>
                                                                 <div class="error" id="photo-size-error"></div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button id="submit" type="submit" class="btn btn-primary {{ $member['id']}}">Save changes</button>
-                                                                </div>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary {{ $member['id']}} submit">Save changes</button>
                                                             </form>
                                                         </div>
 

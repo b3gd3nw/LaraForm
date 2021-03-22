@@ -48,7 +48,8 @@
                     name="birthdate"
                     id="birthdate"
                     :input-class="'form-control'"
-                    placeholder="Select Date"></datepicker>
+                    placeholder="Select Date">
+                </datepicker>
                 <span class="text-danger">{{ errors[0] }}</span>
               </ValidationProvider>
             </p>
@@ -141,7 +142,7 @@ export default {
     },
     phone: '',
     disabledDates: {
-      from: new Date(moment().format('YYYY.MM.DD'))
+      from: new Date(Date.now() - 1)
     },
     error_mail: null
   }),

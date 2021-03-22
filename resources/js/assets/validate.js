@@ -8,8 +8,9 @@ $.validator.addMethod("notNumber", function(value, element, param) {
 }, "Only letters.");
 
 
-$("#submit").click(function (){
-    $("#form").validate({
+$(".submit").click(function (){
+    let form = this.parentNode.getAttribute('id');
+    $('#' + form).validate({
         rules: {
             firstname: {
                 required: true,
@@ -86,4 +87,5 @@ $(document).on('change', 'input[name="photo"]', function () {
         $('#photo-size-error').empty()
     }
 })
+
 

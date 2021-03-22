@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Member;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MembersController extends Controller
 {
@@ -56,7 +57,6 @@ class MembersController extends Controller
      */
     public function show(Member $member)
     {
-//        $member = Profile::find($member);
         if ($member->hide === 0) {
             $member->hide = 1;
             $member->save();
@@ -87,33 +87,27 @@ class MembersController extends Controller
      * @param Profile $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(MemberRequest $request, Member $member)
+    public function update(MemberRequest $request, $id)
     {
-        $member->firstname = $request->firstname;
-        $member->lastname = $request->lastname;
-        $member->birthdate = $request->birthdate;
-        $member->reportsubject = $request->reportsubject;
-        $member->countryId = $request->countryId;
-        $member->phone = $request->phone;
+        // Email check
+        $member= Member::find($id);
         $email = $member->email;
-        $member->email = $request->email;
-        $member->company = $request->company;
-        $member->position = $request->position;
-        $member->aboutme = $request->aboutme;
-        $photo = $request->file('photo');
-        if ($photo != null) {
-            $member->photo = $photo->store('uploads', 'public');
-        } else {
-            $member->photo = $member->photo;
-        }
-
         if ( $email != $request->email ) {
             $validation = $request->validate([
-               'email' => 'unique:members'
+                'email' => 'unique:members'
             ]);
         }
 
-        $member->save();
+
+        $data = $request->except(['_method', '_token']);
+        $photo = $request->file('photo');
+        if ($photo != null) {
+            $data['photo'] = $photo->store('uploads', 'public');
+        } else {
+            $data['photo'] = $member->photo;
+        }
+
+        $member = Member::where('id', $id)->update($data);
 
         return redirect()->back()->withSuccess('Member was successfully updated');
     }
