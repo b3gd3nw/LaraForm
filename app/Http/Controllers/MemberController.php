@@ -37,21 +37,16 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        $member = new Member();
-        $member->firstname = $request->firstname;
-        $member->lastname = $request->lastname;
-        $member->birthdate = $request->birthdate;
-        $member->reportsubject = $request->reportsubject;
-        $member->countryId = $request->countryId;
-        $member->phone = $request->phone_number;
-        $member->email = $request->email;
+//        dd($request->all());
 
         $email = DB::table('members')->where('email', $request->email)->first();
 
         if ($email) {
             return response()->json(['exists' => true]);
         } else {
-            $member->save();
+            $member = Member::create(
+                $request->all()
+            );
             setcookie('userid', $member->id, 0, '/');
             return response()->json(['exists' => false]);
         }
@@ -88,18 +83,16 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $member = Member::find($id);
-        $member->company = $request->company;
-        $member->position = $request->position;
-        $member->aboutme = $request->aboutme;
+        $data = $request->all();
+        $data = $request->except('_method');
         $photo = $request->file('photo');
         if ($photo != null) {
-            $member->photo = $photo->store('uploads', 'public');
+            $data['photo'] = $photo->store('uploads', 'public');
         } else {
-            $member->photo = null;
+            $data['photo'] = null;
         }
 
-        $member->save();
+        $member = Member::where('id', $id)->update($data);
 
         return http_response_code(200);
 

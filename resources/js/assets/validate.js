@@ -7,14 +7,6 @@ $.validator.addMethod("notNumber", function(value, element, param) {
     }
 }, "Only letters.");
 
-$.validator.addMethod(
-    "regex",
-    function(value, element, regexp) {
-        let re = new RegExp(regexp);
-        return this.optional(element) || re.test(value);
-    },
-    "Only letters."
-);
 
 $("#submit").click(function (){
     $("#form").validate({
@@ -22,13 +14,11 @@ $("#submit").click(function (){
             firstname: {
                 required: true,
                 maxlength: 20,
-                regex: "/^[A-Za-zА-Яа-яЁё ]|[a-zA-ZáéíñóúüÁÉÍÑÓÚÜ]|[a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ]|[a-pr-uwy-zA-PR-UWY-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]|[a-zA-ZäöüßÄÖÜẞ]|[a-zA-ZàâäôéèëêïîçùûüÿæœÀÂÄÔÉÈËÊÏÎŸÇÙÛÜÆŒ]|[\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufc3f]|[\ufe70-\ufefc]$/",
                 notNumber: true
             },
             lastname: {
                 required: true,
                 maxlength: 20,
-                regex: "/^[A-Za-zА-Яа-яЁё ]|[a-zA-ZáéíñóúüÁÉÍÑÓÚÜ]|[a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ]|[a-pr-uwy-zA-PR-UWY-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]|[a-zA-ZäöüßÄÖÜẞ]|[a-zA-ZàâäôéèëêïîçùûüÿæœÀÂÄÔÉÈËÊÏÎŸÇÙÛÜÆŒ]|[\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufc3f]|[\ufe70-\ufefc]$/",
                 notNumber: true
             },
             birth_date: {

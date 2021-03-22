@@ -19,7 +19,8 @@ class CreateMembersTable extends Migration
             $table->string('lastname');
             $table->date('birthdate');
             $table->string('reportsubject');
-            $table->foreignId('countryId')->references('id')->on('countries');
+            $table->bigInteger('countryId')->unsigned();
+            $table->foreign('countryId')->references('id')->on('countries');
             $table->string('phone');
             $table->string('email')->unique();
             $table->string('company')->nullable();

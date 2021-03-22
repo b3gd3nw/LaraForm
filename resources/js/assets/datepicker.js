@@ -1,5 +1,3 @@
-import moment from "moment";
-
 $.noConflict();
 $(function() {
     $('input[name="birthdate"]').datepicker({

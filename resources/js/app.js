@@ -39,6 +39,12 @@ import VueCookie from 'vue-cookie'
 Vue.use(VueCookie);
 
 
+//------Notifications----------
+import Notifications from 'vue-notification'
+
+Vue.use(Notifications)
+
+
 //------VeeValidate----------
 import { Validator} from 'vee-validate';
 import {ValidationProvider, extend, ValidationObserver} from 'vee-validate';
@@ -73,7 +79,10 @@ localize({
 // Vue.use(ValidationProvider);
 // Add a rule.
 // No message specified.
-extend('email', email);
+extend('email', {
+    ...email,
+    message: 'Email is not correct'
+});
 
 extend('regex', regex);
 
@@ -145,5 +154,5 @@ Vue.use(ResetInput)
 import router from "./router";
 const app = new Vue({
     el: '#app',
-    router
+    router,
 });
