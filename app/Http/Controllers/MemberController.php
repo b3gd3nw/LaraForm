@@ -37,7 +37,6 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-
         $email = DB::table('members')->where('email', $request->email)->first();
 
         if ($email) {
@@ -93,7 +92,6 @@ class MemberController extends Controller
         $member = Member::where('id', $id)->update($data);
 
         return http_response_code(200);
-
     }
 
     /**
@@ -112,6 +110,5 @@ class MemberController extends Controller
         $members = Member::orderBy('created_at', 'desc')->get();
 
         return response()->json($members)->setStatusCode(200);
-
     }
 }

@@ -92,7 +92,7 @@ class MembersController extends Controller
         // Email check
         $member= Member::find($id);
         $email = $member->email;
-        if ( $email != $request->email ) {
+        if ($email != $request->email) {
             $validation = $request->validate([
                 'email' => 'unique:members'
             ]);
