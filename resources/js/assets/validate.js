@@ -46,7 +46,7 @@ $(".submit").click(function (){
                 maxlength: 200
             },
             photo: {
-                extension: 'png|jpe?g|gif',
+                extension: 'png|jpe?g|jpg',
             },
         },
         messages: {
