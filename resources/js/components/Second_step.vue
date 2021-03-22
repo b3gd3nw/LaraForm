@@ -50,7 +50,7 @@
                     </p>
                     <p>
                         <label for="photo">Photo</label>
-                        <ValidationProvider rules="mimes:image/*" :rules="{ size: 2000 }" v-slot="{ errors, validate }">
+                        <ValidationProvider rules="ext:png,jpg|size:2000" v-slot="{ errors, validate }">
                           <div class="group">
                             <input
                                 class="form-control"
@@ -98,6 +98,7 @@ export default {
 
                 }
             });
+
         },
         getCookie(cname) {
           let name = cname + "=";

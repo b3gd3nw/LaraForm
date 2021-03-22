@@ -48,7 +48,7 @@ Vue.use(Notifications)
 //------VeeValidate----------
 import { Validator} from 'vee-validate';
 import {ValidationProvider, extend, ValidationObserver} from 'vee-validate';
-import { required, email, max, min, mimes, alpha_spaces, size, regex } from 'vee-validate/dist/rules';
+import { required, email, max, min, mimes, alpha_spaces, size, regex, image, ext} from 'vee-validate/dist/rules';
 import { localize } from 'vee-validate';
 
 localize({
@@ -85,6 +85,16 @@ extend('email', {
 });
 
 extend('regex', regex);
+
+extend('image', {
+    ...image,
+    message: 'Only png or jpg type'
+});
+
+extend('ext', {
+    ...ext,
+    message: 'Only png or jpg type'
+});
 
 // Override the default message.
 extend('required', {
