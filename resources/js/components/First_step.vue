@@ -81,7 +81,7 @@
             <p>
               <label>Phone</label>
               <br>
-              <ValidationProvider rules="required|max:20|min:1" v-slot="{ errors }">
+              <ValidationProvider rules="required|max:20|min:11" v-slot="{ errors }">
                 <phone-mask-input
                     v-model="phone"
                     inputClass="form-control"

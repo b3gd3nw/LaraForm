@@ -34,6 +34,7 @@ Route::prefix('/api')->group(function (){
         Route::middleware(['role:admin'])->prefix('admin_panel')->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
 
+            Route::get( 'getphoto/{member}', [MembersController::class, 'getPhoto'])->name('getphoto');
             Route::resource('member', MembersController::class);
         });
     });

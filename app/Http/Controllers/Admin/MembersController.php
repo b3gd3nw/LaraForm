@@ -9,6 +9,8 @@ use App\Models\Member;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
+
 
 class MembersController extends Controller
 {
@@ -76,7 +78,17 @@ class MembersController extends Controller
      */
     public function edit(Member $member)
     {
-        $profile = $member->profile;
+        $countries = Country::all();
+        $data = [
+            'view' => View::make('admin.members.modal')
+                ->with('member', $member)
+                ->with('countries', $countries)
+                ->render()
+        ];
+//        $data = view('admin.members.modal', [
+//            'member' => $member,
+//        ]);
+        return response()->json($data, 200);
     }
 
     /**
@@ -123,5 +135,12 @@ class MembersController extends Controller
         $member->delete();
 
         return redirect()->back()->withSuccess('Delete Success!');
+    }
+    
+    public function getPhoto($id) 
+    {
+        $member= Member::find($id);
+        $data = $member->photo;
+        return response()->json($data, 200);
     }
 }

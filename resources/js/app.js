@@ -114,7 +114,10 @@ extend('max', {
         message: 'Enter no more than 200 characters'
     }
 });
-extend('min', min);
+extend('min', {
+    ...min,
+    message: 'Enter full number'
+});
 extend('mimes', {
     ...mimes,
     message: 'Try again with png or jpg file'

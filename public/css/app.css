@@ -10803,8 +10803,17 @@ h3 {
   line-height: 1.5;
   margin-bottom: 0.25em;
 }
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
 form .form-group .group a {
     border-radius: 50%;
+}
+
+.edit-submit {
+    color: #fff;
 }
 
 .error {
@@ -10814,13 +10823,28 @@ form .form-group .group a {
 .group {
     position: relative;
 }
+
+.user_photo_prev {
+    width: 100px;
+    margin: 0 15px;
+}
+
+.input-wrapper{
+    display: flex !important;
+}
+
+.photo-input {
+    overflow: hidden;
+}
+
 .clear-btn {
     border-radius: 50px !important;
     width: 25px;
     height: 25px;
     padding: 0 !important;
     position: absolute;
-    top: 37px;
+    top: 5px;
     right: 10px;
     color: red;
+    z-index: 1;
 }

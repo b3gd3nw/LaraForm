@@ -86,13 +86,17 @@
                                     <div class="row justify-content-end">
                                         <div class="col-sm-4 text-center mx-auto">
                                             <!-- Button trigger modal 1 -->
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#memberModal{{ $member['id'] }}">
+                                            <button data-path="{{ route('member.edit',$member['id']) }}"
+                                                    class="btn btn-primary btn-sm load-ajax-modal"
+                                                    role="button"
+                                                    data-toggle="modal" data-target="#dynamic-modal{{ $member['id'] }}"
+                                                    id="{{ $member['id'] }}">
                                                 <i class="fas fa-edit">
                                                 </i>
-                                                Edit Member
+                                                <span class="glyphicon glyphicon-eye-open"></span> Edit Member
                                             </button>
                                             <!-- Modal 1 -->
-                                            <div class="modal fade" id="memberModal{{ $member['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="dynamic-modal{{ $member['id'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -101,68 +105,8 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <form id="form{{ $member['id'] }}" method="POST" action="{{ route('member.update', $member['id']) }}" enctype="multipart/form-data">
-                                                                @csrf
-                                                                @method('PUT')
-
-                                                                <div class="form-group">
-                                                                    <label for="firstname{{ $member['id']}}">First Name</label>
-                                                                    <input name="firstname" type="text" class="form-control" id="firstname{{ $member['id']}}" value="{{ $member['firstname'] }}">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="lastname{{ $member['id']}}">Last Name</label>
-                                                                    <input name="lastname" type="text" class="form-control" id="lastname{{ $member['id']}}" value="{{ $member['lastname'] }}">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="birthdate{{ $member['id']}}">Birth Date</label>
-                                                                    <input readonly="readonly" name="birthdate" type="text" class="form-control" id="birthdate{{ $member['id']}}" value="{{ $member['birthdate'] }}">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="reportsubject{{ $member['id']}}">Report Subject</label>
-                                                                    <input name="reportsubject" type="text" class="form-control" id="reportsubject{{ $member['id']}}" value="{{ $member['reportsubject'] }}">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="countryId{{ $member['id']}}">Counrty</label>
-                                                                    <select name="countryId" class="form-control" id="countryId{{ $member['id']}}" required>
-                                                                        @foreach($countries as $country)
-                                                                            <option value="{{ $country['id'] }}" @if ($country['id'] == $member['countryId']) selected
-                                                                                @endif>{{ $country['name'] }}</option>
-                                                                        @endforeach
-                                                                    </select>
-
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="phone{{ $member['id']}}">Phone</label>
-                                                                    <input name="phone" type="text" class="form-control phone" id="phone{{ $member['id']}}" value="{{ $member['phone'] }}">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="{{ $member['id']}}">Email address</label>
-                                                                    <input name="email" type="email" class="form-control" id="email{{ $member['id']}}" value="{{ $member['email'] }}">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="company{{ $member['id']}}">Company</label>
-                                                                    <input type="text" class="form-control" id="copmpany{{ $member['id']}}" value="{{ $member['company'] }}" name="company">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="position{{ $member['id']}}">Position</label>
-                                                                    <input type="text" class="form-control" id="position{{ $member['id']}}" value="{{ $member['position'] }}" name="position">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="aboutme{{ $member['id']}}">About Me</label>
-                                                                    <input type="text" class="form-control" id="aboutme{{ $member['id']}}" value="{{ $member['company'] }}" name="aboutme">
-                                                                </div>
-                                                                <div class="form-group group">
-                                                                    <label for="photo{{ $member['id']}}">Photo</label>
-                                                                    <input type="file" class="form-control" id="photo{{ $member['id']}}" name="photo">
-                                                                    <button type="button" id="{{ $member['id']}}" class="clear-btn btn btn-outline-danger">x</button>
-                                                                </div>
-                                                                <div class="error" id="photo-size-error"></div>
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary {{ $member['id']}} submit">Save changes</button>
-                                                            </form>
+                                                        <div class="modal-body{{ $member['id'] }}">
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>

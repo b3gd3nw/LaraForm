@@ -7,8 +7,11 @@ $.validator.addMethod("notNumber", function(value, element, param) {
     }
 }, "Only letters.");
 
+$.validator.addMethod("minlenghtphone", function (value, element) {
+    return value.replace(/\D+/g, '').length > 10;
+}, "Enter full number.");
 
-$(".submit").click(function (){
+$(document).on('click', '.submit', function () {
     let form = this.parentNode.getAttribute('id');
     $('#' + form).validate({
         rules: {
@@ -22,10 +25,10 @@ $(".submit").click(function (){
                 maxlength: 20,
                 notNumber: true
             },
-            birth_date: {
+            birthdate: {
                 required: true
             },
-            report_subject: {
+            reportsubject: {
                 required: true,
                 maxlength: 255
             },
@@ -33,8 +36,13 @@ $(".submit").click(function (){
                 required: true,
                 maxlength: 100
             },
-            phone_number: {
-                required: true
+            phone: {
+                minlenghtphone: true,
+                required: true,
+                minlength: 11
+            },
+            email: {
+              required: true
             },
             company: {
                 maxlength: 200
