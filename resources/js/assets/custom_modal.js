@@ -39,6 +39,11 @@ $(document).on('click', '.clear-btn', function () {
     axios.get(
         $(this).data('path'))
         .then(responce=> {
-            $(".user_photo_prev").attr("src", "/storage/" + responce.data);
+            if (responce.data !== ''){
+                $(".user_photo_prev").attr("src", "/storage/" + responce.data);
+            } else {
+                $(".user_photo_prev").attr("src", "https://randomuser.me/api/portraits/lego/6.jpg");
+            }
+
         });
 });
