@@ -8,8 +8,11 @@ $('.load-ajax-modal').click(function(){
         $(this).data('path'))
         .then(responce=> {
             $('div.modal-body' + target).html(responce.data.view);
-            // $('.phone').inputmask("+9(999) 999-9999");
             im.mask('.phone');
+            $('input[name="birthdate"]').datepicker({
+                format: 'yyyy-mm-dd',
+                endDate: '-1d'
+            });
         });
 });
 
