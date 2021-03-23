@@ -77,5 +77,3 @@ $(document).on('change', 'input[name="photo"]', function () {
         $('#photo-size-error').empty()
     }
 })
-
-

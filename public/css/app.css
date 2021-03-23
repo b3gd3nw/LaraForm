@@ -10826,11 +10826,13 @@ form .form-group .group a {
 
 .user_photo_prev {
     width: 100px;
-    margin: 0 15px;
+    margin-right: 10px;
 }
 
 .input-wrapper{
     display: flex !important;
+    height: 44px !important;
+
 }
 
 .photo-input {
@@ -10839,12 +10841,11 @@ form .form-group .group a {
 
 .clear-btn {
     border-radius: 50px !important;
-    width: 25px;
-    height: 25px;
-    padding: 0 !important;
+    padding: 0 8px !important;
     position: absolute;
-    top: 5px;
+    top: 8px;
     right: 10px;
     color: red;
     z-index: 1;
 }
+

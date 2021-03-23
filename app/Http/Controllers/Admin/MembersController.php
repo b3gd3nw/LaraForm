@@ -136,11 +136,16 @@ class MembersController extends Controller
 
         return redirect()->back()->withSuccess('Delete Success!');
     }
-    
-    public function getPhoto($id) 
+
+    public function getPhoto($id)
     {
         $member= Member::find($id);
         $data = $member->photo;
-        return response()->json($data, 200);
+        if ($data){
+          return response()->json($data, 200);
+        } else {
+          $data = false;
+          return response()->json($data, 200);
+        }
     }
 }
