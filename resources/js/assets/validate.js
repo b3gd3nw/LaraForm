@@ -1,5 +1,5 @@
 $.validator.addMethod("notNumber", function(value, element, param) {
-    var reg = /[0-9]|[./?<>,;:{}!@#$%^&*()_+=-]/;
+    var reg = /[0-9]|[/?<>;:{}!@#$%^&*()+=]/;
     if(reg.test(value)){
         return false;
     }else{
