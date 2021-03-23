@@ -149,7 +149,7 @@ export default {
   methods: {
     send() {
       let formData = new FormData(document.getElementById("form"));
-      if( /\d|[/?<>;:{}!@#$%^&*()_+=-]/.test(this.formData.firstname) || /\d|[/?<>;:{}!@#$%^&*()_+=-]/.test(this.formData.lastname) ) {
+      if( /\d|[/?<>;:{}!@#$%^&*()+=]/.test(this.formData.firstname) || /\d|[/?<>;:{}!@#$%^&*()+=]/.test(this.formData.lastname) ) {
         console.log('Digit find!');
         this.$notify({
           group: 'foo',
