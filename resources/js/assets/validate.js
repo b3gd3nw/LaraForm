@@ -60,24 +60,6 @@ $(".submit").click(function (){
     });
 });
 
-
-
-$('input[name="firstname"]').keypress(function(event){
-    let inputValue = event.which;
-
-    if(!(inputValue >= 65 && inputValue <= 120) && (inputValue != 32 && inputValue != 0)) {
-        event.preventDefault();
-    }
-});
-
-$('input[name="lastname"]').keypress(function(event){
-    let inputValue = event.which;
-    // allow letters and whitespaces only.
-    if(!(inputValue >= 65 && inputValue <= 120) && (inputValue != 32 && inputValue != 0)) {
-        event.preventDefault();
-    }
-});
-
 $(document).on('change', 'input[name="photo"]', function () {
     if (this.files[0].size > 2000000) {
         $('#photo-size-error').html('File must be less than 2 mb.')
