@@ -38,8 +38,12 @@ form .form-group .group a {
     border-radius: 50px !important;
     padding: 0 8px !important;
     position: absolute;
-    top: 8px;
     right: 10px;
     color: red;
     z-index: 1;
+}
+
+.input_group {
+  display: flex;
+  align-items: center;
 }

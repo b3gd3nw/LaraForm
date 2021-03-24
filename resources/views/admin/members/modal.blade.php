@@ -50,7 +50,7 @@
         </div>
         <div class="form-group group">
             <label for="photo{{ $member['id']}}">Photo</label>
-            <div class="input-group">
+            <div class="input_group">
                 @if ( $member['photo'] !== null )
                     <img class="user_photo_prev img-thumbnail"
                          src="/storage/{{ $member['photo'] }}"
