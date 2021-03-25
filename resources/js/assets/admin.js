@@ -16,14 +16,5 @@ $(document).ready(function () {
             return false;
         }
     });
-    //---------------------------------------------------------------- dev
-    $('.btn-edit').click(function () {
-        axios.get(
-            'membres.edit')
-            .then(responce=> {
-                console.log(responce['firstname']);
-            });
-    });
-    
 })
 
