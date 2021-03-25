@@ -115,6 +115,9 @@ class MembersController extends Controller
         $photo = $request->file('photo');
         if ($photo != null) {
             $data['photo'] = $photo->store('uploads', 'public');
+        } else if (session('delete_photo') == 'true' ) {
+            $data['photo'] = null;
+            session(['delete_photo' => 'false']);
         } else {
             $data['photo'] = $member->photo;
         }
@@ -139,7 +142,7 @@ class MembersController extends Controller
 
     public function getPhoto($id)
     {
-        $member= Member::find($id);
+        $member = Member::find($id);
         $data = $member->photo;
         if ($data){
           return response()->json($data, 200);
@@ -147,5 +150,20 @@ class MembersController extends Controller
           $data = false;
           return response()->json($data, 200);
         }
+    }
+
+    public function deletePhoto($id)
+    {
+//        $member = Member::find($id);
+//
+//        if ($member->photo == null) {
+//            return redirect()->back()->withErrors('Photo not installed');
+//        }
+//
+//        $member->photo = null;
+//        $member->save();
+//        return redirect()->withSuccess('Photo was successfully deleted');
+        session(['delete_photo' => 'true']);
+
     }
 }

@@ -51,18 +51,29 @@
         <div class="form-group group">
             <label for="photo{{ $member['id']}}">Photo</label>
             <div class="input_group">
-                @if ( $member['photo'] !== null )
-                    <img class="user_photo_prev img-thumbnail"
-                         src="/storage/{{ $member['photo'] }}"
-                         alt="user_photo">
-                @else
-                    <img class="user_photo_prev img-thumbnail"
-                         src="https://randomuser.me/api/portraits/lego/6.jpg"
-                         alt="user_photo">
-                @endif
                 <div class="form-control input-wrapper">
                     <input type="file" class="photo-input" id="photo{{ $member['id']}}" name="photo">
                     <button data-path="{{ route('getphoto',$member['id']) }}" type="button" id="{{ $member['id']}}" class="clear-btn btn btn-outline-danger">x</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="image">
+                        @if ( $member['photo'] !== null )
+                            <img class="user_photo_prev img-thumbnail"
+                                 src="/storage/{{ $member['photo'] }}"
+                                 alt="user_photo">
+                        @else
+                            <img class="user_photo_prev img-thumbnail"
+                                 src="https://randomuser.me/api/portraits/lego/6.jpg"
+                                 alt="user_photo">
+                        @endif
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="button">
+                        <button data-path="{{ route('delphoto',$member['id']) }}" type="button" id="delete_photo{{ $member['id']}}" class="btn btn-danger delete_photo">Delete photo</button>
+                    </div>
                 </div>
             </div>
         </div>

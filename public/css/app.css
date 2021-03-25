@@ -10850,6 +10850,11 @@ form .form-group .group a {
 
 .input_group {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.image, .button {
+    display: flex;
 }
 

@@ -49,10 +49,17 @@ $(document).on('click', '.clear-btn', function () {
             } else {
                 $(".user_photo_prev").attr("src", "/storage/" + responce.data);
             }
-
         });
     $('.submit').prop('disabled', false)
     $('#photo-size-error').empty()
     let event = new Event('change');
     document.getElementById("photo" + id).dispatchEvent(event);
+});
+
+$(document).on('click', '.delete_photo', function () {
+    axios.get(
+        $(this).data('path'))
+        .then(responce=> {
+            $(".user_photo_prev").attr("src", "https://randomuser.me/api/portraits/lego/6.jpg");
+        });
 });

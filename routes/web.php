@@ -35,6 +35,7 @@ Route::prefix('/api')->group(function (){
             Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
 
             Route::get( 'getphoto/{member}', [MembersController::class, 'getPhoto'])->name('getphoto');
+            Route::get('deletephoto/{member}', [MembersController::class, 'deletePhoto'])->name('delphoto');
             Route::resource('member', MembersController::class);
         });
     });
