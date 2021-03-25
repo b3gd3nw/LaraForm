@@ -52,4 +52,5 @@ form .form-group .group a {
 
 .image, .button {
     display: flex;
+    align-items: flex-start;
 }
