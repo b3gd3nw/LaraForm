@@ -38,6 +38,7 @@ form .form-group .group a {
     border-radius: 50px !important;
     padding: 0 8px !important;
     position: absolute;
+    top: 41px;
     right: 10px;
     color: red;
     z-index: 1;
