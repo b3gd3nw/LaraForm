@@ -105,6 +105,11 @@ class MemberController extends Controller
         //
     }
 
+    /**
+     * Get all members from database
+     *
+     * @return \Illuminate\Http\JsonResponse|object
+     */
     public function all_members()
     {
         $members = Member::orderBy('created_at', 'desc')->get();

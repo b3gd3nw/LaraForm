@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
-
 class MembersController extends Controller
 {
     /**
@@ -78,6 +77,8 @@ class MembersController extends Controller
      */
     public function edit(Member $member)
     {
+        session(['delete_photo' => 'false']);
+
         $countries = Country::all();
         $data = [
             'view' => View::make('admin.members.modal')
@@ -85,9 +86,7 @@ class MembersController extends Controller
                 ->with('countries', $countries)
                 ->render()
         ];
-//        $data = view('admin.members.modal', [
-//            'member' => $member,
-//        ]);
+
         return response()->json($data, 200);
     }
 
@@ -115,9 +114,8 @@ class MembersController extends Controller
         $photo = $request->file('photo');
         if ($photo != null) {
             $data['photo'] = $photo->store('uploads', 'public');
-        } else if (session('delete_photo') == 'true' ) {
+        } elseif (session('delete_photo') == 'true') {
             $data['photo'] = null;
-            session(['delete_photo' => 'false']);
         } else {
             $data['photo'] = $member->photo;
         }
@@ -140,30 +138,30 @@ class MembersController extends Controller
         return redirect()->back()->withSuccess('Delete Success!');
     }
 
+    /**
+     * Get member photo by id
+     *
+     * @param  integer  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getPhoto($id)
     {
         $member = Member::find($id);
         $data = $member->photo;
-        if ($data){
-          return response()->json($data, 200);
+        if ($data) {
+            return response()->json($data, 200);
         } else {
-          $data = false;
-          return response()->json($data, 200);
+            $data = false;
+            return response()->json($data, 200);
         }
     }
 
-    public function deletePhoto($id)
+    /**
+     * Mark photo to delete
+     *
+     */
+    public function deletePhoto()
     {
-//        $member = Member::find($id);
-//
-//        if ($member->photo == null) {
-//            return redirect()->back()->withErrors('Photo not installed');
-//        }
-//
-//        $member->photo = null;
-//        $member->save();
-//        return redirect()->withSuccess('Photo was successfully deleted');
         session(['delete_photo' => 'true']);
-
     }
 }
